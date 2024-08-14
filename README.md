@@ -31,13 +31,12 @@ mltaskfusion-cli --models=vllm --config=/etc/.ml-task-fusion/main.conf
 ### Basic Example
 
 ```python
-import os
-import mltaskfusion
-from mltaskfusion.db import queue_client, QueueJobModel
-from mltaskfusion.task.vllm import VllmData, VllmModel
-from mltaskfusion.utils import image, helper
 
-os.environ['CONFIG_FILE'] = "/etc/.ml-task-fusion/main.conf "
+import os
+from mltaskfusion.task.vllm import VllmData, VllmModel
+from mltaskfusion.db import queue_client, QueueJobModel
+
+os.environ['CONFIG_FILE'] = "/etc/.ml-task-fusion/main.conf"
 queue_cli = queue_client(queue_name=VllmModel().queue_name)
 
 prompt = """
