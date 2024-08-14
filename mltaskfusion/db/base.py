@@ -1,6 +1,13 @@
 import json
+from pydantic import BaseModel, Field
 from abc import abstractmethod, ABC
-from mltaskfusion.db import QueueJobModel
+
+
+class QueueJobModel(BaseModel):
+    """队列任务模型"""
+
+    id: str = Field(description="任务ID")
+    data: dict = Field(description="任务数据, json 后数据结构")
 
 
 class Job:

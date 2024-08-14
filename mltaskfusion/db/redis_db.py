@@ -2,9 +2,8 @@ import json
 import time
 import redis
 from typing import Any, Union
-from mltaskfusion.db import QueueJobModel
 from mltaskfusion.utils import config, helper
-from .base import _ScikitCompact, Job
+from .base import _ScikitCompact, Job, QueueJobModel
 
 
 class PyRedis(redis.Redis):
