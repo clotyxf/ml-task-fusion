@@ -33,9 +33,8 @@ mltaskfusion-cli --models=vllm --config=/etc/.ml-task-fusion/main.conf
 ```python
 import os
 import mltaskfusion
-from mltaskfusion.db import queue_client
+from mltaskfusion.db import queue_client, QueueJobModel
 from mltaskfusion.task.vllm import VllmData, VllmModel
-from mltaskfusion.task.base import QueueJobModel
 from mltaskfusion.utils import image, helper
 
 os.environ['CONFIG_FILE'] = "/etc/.ml-task-fusion/main.conf "

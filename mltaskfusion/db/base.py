@@ -1,7 +1,6 @@
 import json
 from abc import abstractmethod, ABC
-
-from mltaskfusion.task.base import QueueJobModel
+from mltaskfusion.db import QueueJobModel
 
 
 class Job:

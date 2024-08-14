@@ -1,5 +1,13 @@
+from pydantic import BaseModel, Field
 from .redis_db import RedisQueue
-from .base import _ScikitCompact, Job
+from .base import _ScikitCompact
+
+
+class QueueJobModel(BaseModel):
+    """队列任务模型"""
+
+    id: str = Field(description="任务ID")
+    data: dict = Field(description="任务数据, json 后数据结构")
 
 
 def queue_client(driver: str = "redis", queue_name="ml-default") -> _ScikitCompact:

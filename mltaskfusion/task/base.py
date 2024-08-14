@@ -18,12 +18,6 @@ class BaseData(BaseModel):
     id: str = Field(description="任务ID")
 
 
-class QueueJobModel(BaseData):
-    """队列任务模型"""
-
-    data: dict = Field(description="任务数据, json 后数据结构")
-
-
 class _ScikitCompact(ABC):
 
     @abstractmethod

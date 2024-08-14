@@ -1,8 +1,8 @@
 import json
 import time
-from typing import Any, Union
 import redis
-from mltaskfusion.task.base import QueueJobModel
+from typing import Any, Union
+from mltaskfusion.db import QueueJobModel
 from mltaskfusion.utils import config, helper
 from .base import _ScikitCompact, Job
 
