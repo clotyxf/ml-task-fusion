@@ -1,3 +1,4 @@
+import logging
 import time
 from mltaskfusion.utils import helper
 from .vllm import VllmData, VllmModel, TASK_NAME as VLLM_TASK_NAME, VllmTask
@@ -5,6 +6,7 @@ from .ollama import OllamaData, OllamaModel, TASK_NAME as OLLAMA_TASK_NAME
 from .stablediffusion import StableDiffusionData, StableDiffusionModel, TASK_NAME as STABLEDIFFUSION_TASK_NAME
 from mltaskfusion.db import queue_client, Job
 
+logging.basicConfig(format="%(asctime)s - %(levelname)s - %(message)s", level=logging.INFO)
 task_names = [OLLAMA_TASK_NAME, STABLEDIFFUSION_TASK_NAME, VLLM_TASK_NAME]
 
 
@@ -29,10 +31,11 @@ class Task:
     def handle(self):
         """handle"""
 
-        print(f"task handle: {self.task_name} starting...")
+        logging.info("[task: %s] starting ...", self.task_name)
 
         while True:
             job = self.queue_cli.pop()
+
             if not job:
                 time.sleep(2)
                 continue
@@ -49,7 +52,9 @@ class Task:
         try:
             job.delete()
             data = self.data_class.model_validate_json(job.get_raw_body())
+            logging.info("[task: %s] Processing job: %s ...", self.task_name, data.id)
             result = self.task_cli.handle(data)
+            logging.info("[task: %s] Processed job: %s", self.task_name, data.id)
         except Exception as e:
             result = ""
         self.queue_cli.update_result(task_id=data.id, data={"content": result})
