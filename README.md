@@ -12,12 +12,14 @@ pip install mltaskfusion
 
 ```conf
 # redis 配置
-REDIS_HOST="192.168.9.5"
+REDIS_HOST="127.0.0.1"
 REDIS_PASSWORD="123456"
-REDIS_PORT=16379
+REDIS_PORT=6379
 
 # vllm 框架地址
-VLLM_BASE_URL="http://118.145.131.117:8000/v1"
+VLLM_BASE_URL="http://127.0.0.1:8000/v1"
+# ollama 框架地址
+OLLAMA_BASE_URL="http://127.0.0.1:11434/v1"
 ```
 
 启动服务:
