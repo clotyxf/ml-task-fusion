@@ -15,7 +15,7 @@ class StableDiffusionModel(TaskModel):
 
 class StableDiffusionData(BaseModel):
     prompt: str = Field(max_length=4096)
-    image_urls: list = Field(default=[], description="list of image urls")
+    images: list = Field(default=[], description="list of image, format: image url, bytes, or PIL Image")
 
 
 class StableDiffusionTask(_ScikitCompact):

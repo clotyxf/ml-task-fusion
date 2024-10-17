@@ -1,8 +1,9 @@
 from pydantic import Field
 from typing import Any
-from mltaskfusion.utils import config, image
-from .base import _ScikitCompact, BaseData, TaskModel
 from openai import OpenAI
+from mltaskfusion.utils import config, image
+
+from .base import _ScikitCompact, BaseData, TaskModel
 
 TASK_NAME = "vllm"
 QUEUE_NAME = "vllm-j76g"
@@ -19,7 +20,7 @@ class VllmData(BaseData):
     """vllm data"""
 
     prompt: str = Field(max_length=4096)
-    image_urls: list = Field(default=[], description="list of image urls")
+    images: list = Field(default=[], description="list of image urls")
     max_tokens: int = 4096
     ml_model_name: str = "openbmb/MiniCPM-Llama3-V-2_5"
 
@@ -36,7 +37,7 @@ class VllmTask(_ScikitCompact):
     def handle(self, data: VllmData) -> Any:
         new_image = None
 
-        for img in data.image_urls:
+        for img in data.images:
             if not new_image:
                 new_image = image.load_image(img)
             else:

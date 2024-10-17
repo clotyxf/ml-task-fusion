@@ -80,7 +80,7 @@ Output format:
         }
     ]                    
 """
-data = VllmData(prompt=prompt, image_urls=[], max_tokens=1024, id=helper.unique_id())
+data = VllmData(prompt=prompt, images=[], max_tokens=1024, id=helper.unique_id())
 result = queue_cli.push_and_response(job=QueueJobModel(id=data.id, data=data.model_dump()), seconds=120)
 print(result)
 ```

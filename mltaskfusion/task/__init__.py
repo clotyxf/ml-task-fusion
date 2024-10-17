@@ -2,7 +2,7 @@ import logging
 import time
 from mltaskfusion.utils import helper
 from .vllm import VllmData, VllmModel, TASK_NAME as VLLM_TASK_NAME, VllmTask
-from .ollama import OllamaData, OllamaModel, TASK_NAME as OLLAMA_TASK_NAME
+from .ollama import OllamaData, OllamaModel, TASK_NAME as OLLAMA_TASK_NAME, OllamaTask
 from .stablediffusion import StableDiffusionData, StableDiffusionModel, TASK_NAME as STABLEDIFFUSION_TASK_NAME
 from mltaskfusion.db import queue_client, Job
 
@@ -17,6 +17,7 @@ class Task:
         if self.task_name == OLLAMA_TASK_NAME:
             task = OllamaModel(id=helper.unique_id())
             self.data_class = OllamaData
+            self.task_cli = OllamaTask()
         elif self.task_name == STABLEDIFFUSION_TASK_NAME:
             task = StableDiffusionModel(id=helper.unique_id())
             self.data_class = StableDiffusionData
